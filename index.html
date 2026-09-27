@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaily & Tbyan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100vh;overflow-x:hidden}
+body{background:#0a0518;background-image:linear-gradient(135deg,#0a0518 0%,#1a0a2e 50%,#0a0518 100%);color:#fff;padding-bottom:95px}
+.topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:rgba(10,5,24,.95);border-bottom:1px solid rgba(255,255,255,.06)}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#8b5cf6,#ec4899);display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 6px 20px rgba(139,92,246,.5)}
+.brand-text{font-size:11px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.5px}
+.brand-sub{font-size:15px;font-weight:900;background:linear-gradient(135deg,#a78bfa,#22d3ee,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.top-actions{display:flex;gap:8px}
+.icon-btn{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff;cursor:pointer}
+.container{position:relative;z-index:1;padding:22px 18px;max-width:560px;margin:0 auto}
+.field{position:relative;margin-bottom:14px}
+.field input{width:100%;padding:17px 20px;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.12);border-radius:16px;color:#fff;font-size:16px;font-weight:600;transition:border-color .3s,box-shadow .3s;outline:none}
+.field input::placeholder{color:rgba(255,255,255,.4);font-weight:400}
+.field input:focus{background:rgba(255,255,255,.09);border-color:#8b5cf6;box-shadow:0 0 0 4px rgba(139,92,246,.25)}
+.btn{width:100%;padding:17px;border:none;border-radius:16px;font-size:17px;font-weight:800;color:#fff;cursor:pointer;transition:transform .2s,box-shadow .3s;margin-top:12px;background:linear-gradient(135deg,#8b5cf6,#ec4899);box-shadow:0 12px 32px rgba(139,92,246,.4);font-family:'Cairo',sans-serif}
+.btn:active{transform:scale(.97)}
+.btn-secondary{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);box-shadow:none}
+.btn-danger{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 12px 32px rgba(239,68,68,.4)}
+.whatsapp-btn{width:100%;padding:16px;margin-top:12px;background:rgba(37,211,102,.12);border:1.5px solid rgba(37,211,102,.5);border-radius:16px;color:#25D366;font-size:14px;font-weight:700;cursor:pointer;transition:.3s;font-family:'Cairo',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;line-height:1.6;text-align:center}
+.whatsapp-btn:active{transform:scale(.97);background:rgba(37,211,102,.2)}
+.bottombar{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;justify-content:space-around;align-items:center;padding:10px 8px 14px;background:rgba(10,5,24,.97);border-top:1px solid rgba(255,255,255,.06)}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:rgba(255,255,255,.5);font-weight:700;cursor:pointer;transition:color .3s;flex:1}
+.nav-item.active{color:#a78bfa}
+.nav-item .ic{font-size:19px}
+.nav-center{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#ec4899);display:flex;align-items:center;justify-content:center;font-size:27px;color:#fff;box-shadow:0 10px 30px rgba(139,92,246,.5);margin-top:-20px;cursor:pointer;flex-shrink:0}
+.nav-center:active{transform:scale(.95)}
+.hidden{display:none!important}
+.welcome{text-align:center;margin-bottom:20px}
+.welcome h2{font-size:22px;font-weight:900;margin-bottom:4px;background:linear-gradient(135deg,#a78bfa,#22d3ee,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.welcome p{font-size:13px;color:rgba(255,255,255,.55)}
+.account-row{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 18px;margin-bottom:10px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:background .3s}
+.account-row:active{background:rgba(139,92,246,.2);transform:scale(.98)}
+.account-row .ic{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(236,72,153,.25));display:flex;align-items:center;justify-content:center;font-size:20px}
+.account-row .info{flex:1}
+.account-row .info .lbl{font-size:15px;font-weight:700}
+.account-row .info .sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
+.account-row .arrow{font-size:18px;color:rgba(255,255,255,.4)}
+.wallet-balance{background:linear-gradient(135deg,#8b5cf6,#ec4899);border-radius:26px;padding:28px;text-align:center;margin-bottom:20px;box-shadow:0 20px 45px rgba(139,92,246,.5);position:relative;overflow:hidden}
+.wallet-balance::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.15),transparent 70%);background-size:200% 200%;animation:shine 4s infinite}
+@keyframes shine{0%{background-position:-100% 0}100%{background-position:200% 0}}
+.wallet-balance .lbl{font-size:13px;opacity:.95;margin-bottom:6px}
+.wallet-balance .amount{font-size:44px;font-weight:900;letter-spacing:1px;text-shadow:0 4px 20px rgba(0,0,0,.3)}
+.wallet-balance .unit{font-size:14px;opacity:.95;margin-top:4px}
+.student-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.student-card .student-name{font-size:15px;font-weight:800;margin-bottom:3px}
+.student-card .student-sub{font-size:11px;color:rgba(255,255,255,.5)}
+.student-card .student-score{padding:8px 14px;border-radius:12px;font-weight:800;font-size:14px;background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 6px 20px rgba(16,185,129,.3)}
+.student-card .del-btn{background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);color:#f87171;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;margin-right:8px}
+.student-card .del-btn:active{transform:scale(.9)}
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-120px);background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;padding:14px 24px;border-radius:14px;font-weight:800;font-size:15px;box-shadow:0 15px 40px rgba(0,0,0,.6);z-index:10000;opacity:0;transition:opacity .3s,transform .3s;max-width:90%;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.warn{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.toast.error{background:linear-gradient(135deg,#ef4444,#dc2626)}
+.toast.success{background:linear-gradient(135deg,#10b981,#059669)}
+.welcome-screen{min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:30px 20px;text-align:center}
+.welcome-logo{width:100px;height:100px;border-radius:30px;background:linear-gradient(135deg,#8b5cf6,#ec4899);display:flex;align-items:center;justify-content:center;font-size:48px;margin-bottom:24px;box-shadow:0 20px 50px rgba(139,92,246,.6)}
+.welcome-brand{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:2px;font-weight:700;margin-bottom:8px}
+.welcome-title{font-size:30px;font-weight:900;margin-bottom:8px;background:linear-gradient(135deg,#a78bfa,#22d3ee,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.welcome-sub{font-size:14px;color:rgba(255,255,255,.55);margin-bottom:20px}
+.ref-banner{margin-bottom:18px;padding:14px 18px;background:linear-gradient(135deg,rgba(16,185,129,.25),rgba(52,211,153,.15));border:1.5px solid rgba(52,211,153,.6);border-radius:14px;color:#6ee7b7;font-size:14px;font-weight:700;text-align:center;line-height:1.6}
+.pricing-box{background:linear-gradient(135deg,rgba(251,191,36,.12),rgba(245,158,11,.06));border:1px solid rgba(251,191,36,.3);border-radius:18px;padding:18px;margin-bottom:16px}
+.pricing-title{font-size:16px;font-weight:900;margin-bottom:14px;text-align:center;background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.pricing-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.05);margin-bottom:8px;cursor:pointer;transition:all .3s;position:relative}
+.pricing-row:last-child{margin-bottom:0}
+.pricing-row.selected{background:linear-gradient(135deg,rgba(139,92,246,.5),rgba(236,72,153,.4));border:1.5px solid #a78bfa;box-shadow:0 10px 25px rgba(139,92,246,.5)}
+.pricing-row.selected span:first-child{color:#fff;font-weight:900}
+.pricing-row.selected .price-val{color:#fbbf24}
+.pricing-row.selected::after{content:'✓';position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#fff;font-weight:900;font-size:16px}
+.pricing-row span:first-child{font-size:14px;color:rgba(255,255,255,.85);font-weight:700}
+.price-val{font-size:14px;font-weight:900;background:linear-gradient(135deg,#34d399,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.big-welcome{min-height:calc(100vh - 200px);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px 20px}
+.big-welcome .wave{font-size:70px;margin-bottom:20px;display:inline-block;animation:waveAnim 3s infinite}
+@keyframes waveAnim{0%,100%{transform:rotate(0)}20%{transform:rotate(20deg)}40%{transform:rotate(-10deg)}60%{transform:rotate(15deg)}80%{transform:rotate(-5deg)}}
+.big-welcome .hello{font-size:18px;color:rgba(255,255,255,.6);font-weight:600;margin-bottom:12px;letter-spacing:1px}
+.big-welcome .name{font-size:38px;font-weight:900;margin-bottom:20px;line-height:1.3;background:linear-gradient(135deg,#a78bfa,#22d3ee,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.big-welcome .phrase{font-size:22px;font-weight:700;color:#c4b5fd;line-height:1.8;padding:20px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);border-radius:20px;max-width:500px}
+.gifts-box{margin-top:28px;padding:22px;background:linear-gradient(135deg,rgba(251,191,36,.18),rgba(245,158,11,.08));border:1.5px solid rgba(251,191,36,.45);border-radius:22px;text-align:center;width:100%;max-width:500px;box-shadow:0 15px 40px rgba(251,191,36,.2)}
+.gifts-icon{font-size:52px;margin-bottom:8px;display:inline-block;animation:giftBounce 2s infinite}
+@keyframes giftBounce{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(8deg)}}
+.gifts-title{font-size:20px;font-weight:900;margin-bottom:8px;background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gifts-desc{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:16px;line-height:1.8}
+.gifts-desc b{color:#fbbf24}
+.add-student-btn{background:linear-gradient(135deg,#8b5cf6,#ec4899);border:none;border-radius:22px;padding:26px;width:100%;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;transition:transform .2s;box-shadow:0 15px 35px rgba(139,92,246,.45);color:#fff;font-family:'Cairo',sans-serif}
+.add-student-btn:active{transform:scale(.97)}
+.add-student-btn .icon{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:6px}
+.add-student-btn .txt{font-size:20px;font-weight:900}
+.add-student-btn .sub{font-size:12px;opacity:.85;font-weight:600}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9998;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.show{opacity:1;pointer-events:all}
+.modal{background:linear-gradient(150deg,#1a1030,#0e0a20);border:1px solid rgba(139,92,246,.4);border-radius:24px;padding:26px;width:100%;max-width:420px;transform:scale(.9);transition:transform .3s;max-height:90vh;overflow-y:auto}
+.modal-overlay.show .modal{transform:scale(1)}
+.modal h3{font-size:20px;font-weight:900;text-align:center;margin-bottom:20px;background:linear-gradient(135deg,#a78bfa,#22d3ee,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.modal-actions{display:flex;gap:10px;margin-top:20px}
+.modal-actions button{flex:1}
+.upload-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:17px 20px;background:rgba(255,255,255,.05);border:1.5px dashed rgba(139,92,246,.5);border-radius:16px;color:rgba(255,255,255,.7);font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;font-family:'Cairo',sans-serif;text-align:center;margin-bottom:14px}
+.upload-btn:active{background:rgba(139,92,246,.2);transform:scale(.98)}
+.images-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.images-grid:empty{display:none}
+.img-thumb{position:relative;border-radius:12px;overflow:hidden;border:1.5px solid rgba(139,92,246,.4);aspect-ratio:1}
+.img-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.img-thumb .remove-img{position:absolute;top:4px;left:4px;width:26px;height:26px;border-radius:50%;background:rgba(239,68,68,.95);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.gift-overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px}
+.gift-card{background:linear-gradient(150deg,#1a1030,#0e0a20);border:2px solid rgba(251,191,36,.6);border-radius:26px;padding:30px 24px;text-align:center;max-width:380px;width:100%;box-shadow:0 25px 70px rgba(251,191,36,.4);animation:giftPop .5s cubic-bezier(.4,0,.2,1)}
+@keyframes giftPop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.gift-card .gift-icon{font-size:80px;margin-bottom:16px;animation:giftBounce 1s infinite}
+.gift-card h2{font-size:24px;font-weight:900;margin-bottom:10px;background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.gift-card .gift-amount{font-size:50px;font-weight:900;color:#34d399;margin:16px 0;text-shadow:0 4px 20px rgba(52,211,153,.5)}
+.gift-card .gift-from{font-size:15px;color:#c4b5fd;margin-bottom:20px}
+.gift-card .gift-msg{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:24px;line-height:1.7}
+.share-link-box{background:rgba(139,92,246,.12);border:1.5px solid rgba(139,92,246,.5);border-radius:16px;padding:14px;margin-bottom:16px}
+.share-link-text{font-size:13px;color:#c4b5fd;font-weight:700;word-break:break-all;direction:ltr;text-align:left;line-height:1.7;margin-bottom:12px;padding:8px;background:rgba(0,0,0,.25);border-radius:10px;max-height:100px;overflow-y:auto;user-select:all}
+.copy-btn{width:100%;padding:14px;background:linear-gradient(135deg,#8b5cf6,#ec4899);border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:900;font-family:'Cairo',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .2s;box-shadow:0 8px 24px rgba(139,92,246,.4)}
+.copy-btn:active{transform:scale(.96)}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-logo">📖</div>
+    <div>
+      <div class="brand-text">VAILY & TBYAN</div>
+      <div class="brand-sub" id="brandName">منصة تعليمية</div>
+    </div>
+  </div>
+  <div class="top-actions">
+    <div class="icon-btn" onclick="clickSound();showToast('🔔 لا توجد إشعارات جديدة')">🔔</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div id="screen-login">
+    <div class="welcome-screen">
+      <div class="welcome-logo">📖</div>
+      <div class="welcome-brand">VAILY & TBYAN</div>
+      <div class="welcome-title">أهلاً بك يا معلم</div>
+      <div class="welcome-sub">سجّل دخولك للبدء</div>
+      <div id="refBanner" class="ref-banner hidden">💙 <span id="refBannerText">—</span></div>
+      <div style="width:100%;">
+        <div class="field"><input type="text" id="inp-teacher" placeholder="اسم المعلم" autocomplete="off"></div>
+        <div class="field"><input type="tel" id="inp-code" placeholder="كود الدخول" autocomplete="off" inputmode="numeric" maxlength="10" dir="ltr" style="text-align:left"></div>
+        <button class="btn" onclick="clickSound();doLogin()">🚀 ابدأ</button>
+        <button class="whatsapp-btn" onclick="clickSound();contactAdminLogin()">💬 تحدث معنا لنصنع لك حساباً خاصاً لمعاليك في دقائق</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-home" class="hidden">
+    <div class="big-welcome">
+      <div class="wave">👋</div>
+      <div class="hello">أهلاً مستر</div>
+      <div class="name" id="welcomeName">—</div>
+      <div class="phrase" id="welcomePhrase">—</div>
+      <div class="gifts-box">
+        <div class="gifts-icon">🎁</div>
+        <div class="gifts-title">هدايا الإحالة</div>
+        <div class="gifts-desc">شارك رابطك مع أصدقائك المعلمين<br>واحصل على <b>50 نقطة</b> لكل معلم يسجّل من خلالك</div>
+        <button class="btn" onclick="clickSound();shareReferral()">📤 شارك رابط الإحالة</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-students" class="hidden">
+    <div class="welcome"><h2>📚 طلابي</h2><p>قائمة الطلاب ونتائجهم</p></div>
+    <div id="studentsList"></div>
+  </div>
+
+  <div id="screen-wallet" class="hidden">
+    <div class="welcome"><h2>🏆 نقاطي</h2><p>إدارة رصيدك</p></div>
+    <div class="wallet-balance">
+      <div class="lbl">الرصيد الحالي</div>
+      <div class="amount" id="walletBalance">0</div>
+      <div class="unit">نقطة</div>
+    </div>
+    <div class="pricing-box">
+      <div class="pricing-title">💰 أسعار النقاط</div>
+      <div class="pricing-row" data-egp="100" data-points="500" onclick="selectPackage(this)"><span>100 جنيه</span><span class="price-val">500 نقطة</span></div>
+      <div class="pricing-row" data-egp="200" data-points="1100" onclick="selectPackage(this)"><span>200 جنيه</span><span class="price-val">1100 نقطة</span></div>
+      <div class="pricing-row" data-egp="500" data-points="3000" onclick="selectPackage(this)"><span>500 جنيه</span><span class="price-val">3000 نقطة</span></div>
+    </div>
+    <button class="btn btn-secondary" onclick="clickSound();requestCode()">💬 اطلب كود من الإدارة</button>
+    <div class="field" style="margin-top:16px"><input type="text" id="inp-charge" placeholder="كود الشحن" autocomplete="off" inputmode="text"></div>
+    <button class="btn" id="btn-recharge" onclick="clickSound();redeemCharge()">💳 شحن الرصيد</button>
+  </div>
+
+  <div id="screen-account" class="hidden">
+    <div class="welcome"><h2>👤 حسابي</h2><p>إدارة حسابك</p></div>
+    <div class="account-row" onclick="clickSound();shareReferral()" style="border-color:rgba(52,211,153,.4);background:rgba(16,185,129,.08)">
+      <div class="ic">🎁</div>
+      <div class="info"><div class="lbl" style="color:#34d399">شارك رابط الإحالة</div><div class="sub">ادعُ معلم واحصل على 50 نقطة</div></div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="account-row" onclick="clickSound();showToast('👤 ' + currentTeacher)">
+      <div class="ic">👤</div>
+      <div class="info"><div class="lbl">الاسم</div><div class="sub" id="accName">—</div></div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="account-row" onclick="clickSound();showToast('🔑 ' + teacherCode)">
+      <div class="ic">🔑</div>
+      <div class="info"><div class="lbl">كود الدخول</div><div class="sub" id="accCode">—</div></div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="account-row" onclick="clickSound();contactAdmin()">
+      <div class="ic">💬</div>
+      <div class="info"><div class="lbl">تحدث مع الإدارة</div><div class="sub">راسلنا على واتساب</div></div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="account-row" onclick="clickSound();deleteAccount()" style="border-color:rgba(239,68,68,.3)">
+      <div class="ic">🗑️</div>
+      <div class="info"><div class="lbl" style="color:#f87171">حذف الحساب</div><div class="sub">لا يمكن التراجع</div></div>
+      <div class="arrow">›</div>
+    </div>
+    <button class="btn btn-danger" onclick="clickSound();logout()" style="margin-top:20px">🚪 تسجيل الخروج</button>
+  </div>
+
+  <div id="screen-create" class="hidden">
+    <div class="welcome"><h2>➕ إنشاء اختبار جديد</h2><p>املأ البيانات وأرسلها للمضيف</p></div>
+    <div class="field"><input type="text" id="inp-subject" placeholder="عنوان المادة" autocomplete="off"></div>
+    <div class="field"><input type="text" id="inp-lesson" placeholder="اسم الدرس" autocomplete="off"></div>
+    <div class="field"><input type="text" id="inp-source" placeholder="الصق الدرس لأصنع لمعاليك اختباراً" autocomplete="off"></div>
+    <input type="file" id="inp-images" accept="image/*" multiple style="display:none" onchange="handleImageUpload(event)">
+    <label for="inp-images" class="upload-btn">📷 أو ارفع صور الدرس (حتى 5 صور)</label>
+    <div id="imagesPreview" class="images-grid"></div>
+    <button class="btn" onclick="clickSound();sendToHost()">📤 أرسل للمضيف</button>
+    <button class="btn btn-secondary" onclick="clickSound();goTo('home')">إلغاء</button>
+  </div>
+
+</div>
+
+<div class="modal-overlay" id="shareModal">
+  <div class="modal">
+    <h3>🎁 شارك رابط الإحالة</h3>
+    <p style="text-align:center;font-size:13px;color:rgba(255,255,255,.6);margin-bottom:18px;line-height:1.7">انسخ الرابط وابعته لأصحابك المعلمين</p>
+    <div class="share-link-box">
+      <div class="share-link-text" id="shareLinkText">—</div>
+      <button class="copy-btn" onclick="copyShareLink()">📋 نسخ</button>
+    </div>
+    <button class="btn" onclick="shareViaWhatsApp()">📤 شارك على واتساب</button>
+    <button class="btn btn-secondary" onclick="closeShareModal()">إغلاق</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="studentModal">
+  <div class="modal">
+    <h3>➕ إضافة طالب جديد</h3>
+    <div class="field"><input type="text" id="st-name" placeholder="اسم الطالب (ثلاثي)" autocomplete="off"></div>
+    <div class="field"><input type="text" id="st-subject" placeholder="المادة (اختياري)" autocomplete="off"></div>
+    <div class="field"><input type="tel" id="st-score" placeholder="الدرجة (0 - 100)" autocomplete="off" inputmode="numeric" maxlength="3" dir="ltr" style="text-align:left"></div>
+    <div class="modal-actions">
+      <button class="btn" onclick="clickSound();saveStudent()">💾 حفظ</button>
+      <button class="btn btn-secondary" onclick="clickSound();closeStudentModal()">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<div class="bottombar hidden" id="bottombar">
+  <div class="nav-item active" data-nav="home" onclick="navSound();goTo('home')"><span class="ic">🏠</span><span>الرئيسية</span></div>
+  <div class="nav-item" data-nav="students" onclick="navSound();goTo('students')"><span class="ic">📚</span><span>طلابي</span></div>
+  <div class="nav-center" onclick="navSound();goTo('create')">+</div>
+  <div class="nav-item" data-nav="wallet" onclick="navSound();goTo('wallet')"><span class="ic">🏆</span><span>نقاطي</span></div>
+  <div class="nav-item" data-nav="account" onclick="navSound();goTo('account')"><span class="ic">👤</span><span>حسابي</span></div>
+</div>
+
+<script>
+const ADMIN_PHONE='201002568382';
+const POINTS_PER_EXAM=50;
+const INITIAL_POINTS=50;
+const MAX_IMAGES=5;
+const REFERRER_GIFT=50;
+
+const WELCOME_PHRASES=[
+  'مَرْحَبًا بِنُورِ الْعِلْمِ الْأَزَلِيِّ',
+  'أَهْلًا بِجِسْرِ الْمَاضِي وَالْمُسْتَقْبَلِ',
+  'السَّلَامُ عَلَى غَارِسِ الْمَعْرِفَةِ',
+  'مَرْحَبًا بِمَنْ جَعَلَ التَّرْبِيَةَ عِبَادَةً',
+  'أَهْلًا بِعَبَقِ الْأَزَلِ فِي حَضْرَتِكَ',
+  'السَّلَامُ عَلَى فَاتِحِ أَبْوَابِ الْحِكْمَةِ',
+  'مَرْحَبًا بِمَنْ يُذَكِّرُنَا أَنَّ الْعِلْمَ خَالِدٌ',
+  'أَهْلًا بِبَانِي الْعُقُولِ وَالْقُلُوبِ',
+  'السَّلَامُ عَلَى حَامِلِ أَمَانَةِ التَّرْبِيَةِ',
+  'مَرْحَبًا، مَعَكَ يَبْدَأُ دَرْسُ الْحَيَاةِ'
+];
+
+let currentTeacher='';
+let teacherCode='';
+let walletPoints=INITIAL_POINTS;
+let totalCharged=INITIAL_POINTS;
+let totalSpent=0;
+let STUDENTS=[];
+let selectedPackage=null;
+let uploadedImages=[];
+
+const urlParams=new URLSearchParams(window.location.search);
+const referralCode=urlParams.get('ref')||'';
+const referrerPhone=urlParams.get('rphone')||'';
+const giftAmount=parseInt(urlParams.get('gift')||'0',10);
+const giftFrom=urlParams.get('from')||'';
+const giftClaimId=urlParams.get('gid')||'';
+
+function getDeviceId(){
+  let did=localStorage.getItem('vt_device_id');
+  if(!did){
+    did='dev-'+Date.now()+'-'+Math.random().toString(36).slice(2,10);
+    try{ localStorage.setItem('vt_device_id',did); }catch(e){}
+  }
+  return did;
+}
+function hasDeviceUsedReferral(){ return localStorage.getItem('vt_device_used_ref')==='1'; }
+function markDeviceUsedReferral(){ try{ localStorage.setItem('vt_device_used_ref','1'); }catch(e){} }
+
+let audioCtx=null;
+function getCtx(){ if(!audioCtx){ try{ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } return audioCtx; }
+function playTone(freq,duration,type,vol){
+  try{
+    const ctx=getCtx();
+    if(!ctx) return;
+    if(ctx.state==='suspended') ctx.resume();
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+    osc.type=type||'sine';
+    osc.frequency.value=freq;
+    const v=vol||0.06;
+    gain.gain.setValueAtTime(v,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime+duration);
+  }catch(e){}
+}
+function clickSound(){ playTone(1200,0.06,'sine',0.05); setTimeout(()=>playTone(1600,0.05,'sine',0.04),40); }
+function navSound(){ playTone(600,0.1,'sine',0.05); setTimeout(()=>playTone(900,0.12,'sine',0.05),70); }
+function successSound(){ playTone(523,0.12,'sine',0.06); setTimeout(()=>playTone(659,0.12,'sine',0.06),100); setTimeout(()=>playTone(784,0.2,'sine',0.06),200); }
+function errorSound(){ playTone(220,0.2,'sawtooth',0.05); setTimeout(()=>playTone(180,0.25,'sawtooth',0.04),150); }
+function warnSound(){ playTone(400,0.15,'triangle',0.05); setTimeout(()=>playTone(400,0.15,'triangle',0.05),180); }
+function cashSound(){ playTone(880,0.08,'square',0.04); setTimeout(()=>playTone(1100,0.08,'square',0.04),80); setTimeout(()=>playTone(1320,0.15,'sine',0.05),160); }
+function loginSound(){ playTone(440,0.1,'sine',0.05); setTimeout(()=>playTone(554,0.1,'sine',0.05),90); setTimeout(()=>playTone(659,0.15,'sine',0.06),180); }
+function giftSound(){ playTone(659,0.15,'sine',0.07); setTimeout(()=>playTone(784,0.15,'sine',0.07),120); setTimeout(()=>playTone(988,0.15,'sine',0.07),240); setTimeout(()=>playTone(1319,0.3,'sine',0.08),360); }
+
+function getAllTeachers(){ try{ return JSON.parse(localStorage.getItem('vt_teachers')||'{}'); }catch(e){ return {}; } }
+function saveAllTeachers(db){ try{ localStorage.setItem('vt_teachers',JSON.stringify(db)); }catch(e){} }
+function saveCurrentTeacherData(){
+  if(!teacherCode) return;
+  const db=getAllTeachers();
+  db[teacherCode]={ name:currentTeacher, code:teacherCode, walletPoints:walletPoints, totalCharged:totalCharged, totalSpent:totalSpent, students:STUDENTS, lastActive:new Date().toISOString() };
+  saveAllTeachers(db);
+  try{ localStorage.setItem('vt_current',teacherCode); }catch(e){}
+}
+function loadTeacherData(code){ const db=getAllTeachers(); return db[code]||null; }
+
+function isGiftUsed(gid){
+  if(!gid) return false;
+  try{ const used=JSON.parse(localStorage.getItem('vt_used_gifts')||'[]'); return used.indexOf(gid)!==-1; }catch(e){ return false; }
+}
+function markGiftUsed(gid){
+  if(!gid) return;
+  try{
+    const used=JSON.parse(localStorage.getItem('vt_used_gifts')||'[]');
+    if(used.indexOf(gid)===-1) used.push(gid);
+    localStorage.setItem('vt_used_gifts',JSON.stringify(used));
+  }catch(e){}
+}
+
+function speakWelcome(name){
+  if(!('speechSynthesis' in window)) return;
+  const phrase=WELCOME_PHRASES[Math.floor(Math.random()*WELCOME_PHRASES.length)];
+  const phraseEl=document.getElementById('welcomePhrase');
+  if(phraseEl) phraseEl.textContent='🌿 '+phrase;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(phrase);
+  u.lang='ar-SA'; u.rate=.85; u.pitch=1;
+  setTimeout(()=>window.speechSynthesis.speak(u),600);
+}
+
+function isValidUser(input){
+  const s=String(input).replace(/\D/g,'');
+  if(s.length!==10) return false;
+  const n=[];
+  for(let i=0;i<10;i+=2) n.push(parseInt(s.substr(i,2),10));
+  return (n[0]+n[1]-n[2]+n[3]+n[4])===78;
+}
+
+function validateChargeCode(code){
+  code=String(code).toUpperCase().replace(/\s/g,'');
+  if(/^[A-Z]\d{2}[A-Z]\d[A-Z]{2}\d$/.test(code)) return 500;
+  if(/^[A-Z]{3}\d{2}[A-Z]\d$/.test(code)) return 1100;
+  if(/^[A-Z]\d{2}[A-Z]{2}\d\d{2}[A-Z]$/.test(code)) return 3000;
+  return null;
+}
+
+function loadState(){
+  getDeviceId();
+
+  if(referralCode && !currentTeacher){
+    if(hasDeviceUsedReferral()){
+      document.getElementById('refBanner').classList.remove('hidden');
+      document.getElementById('refBanner').style.background='linear-gradient(135deg,rgba(239,68,68,.25),rgba(220,38,38,.15))';
+      document.getElementById('refBanner').style.borderColor='rgba(239,68,68,.6)';
+      document.getElementById('refBanner').style.color='#fca5a5';
+      document.getElementById('refBannerText').textContent='⚠️ هذا الجهاز استخدم رابط إحالة من قبل — سجّل بشكل عادي';
+    } else {
+      document.getElementById('refBanner').classList.remove('hidden');
+      document.getElementById('refBannerText').textContent='أنت مدعو من معلم صديق';
+    }
+  }
+
+  let lastCode='';
+  try{ lastCode=localStorage.getItem('vt_current')||''; }catch(e){}
+  if(lastCode){
+    const data=loadTeacherData(lastCode);
+    if(data){
+      currentTeacher=data.name;
+      teacherCode=data.code;
+      walletPoints=data.walletPoints;
+      totalCharged=data.totalCharged||INITIAL_POINTS;
+      totalSpent=data.totalSpent||0;
+      STUDENTS=data.students||[];
+      showHome();
+      updateWallet();
+      renderStudents();
+      setTimeout(()=>speakWelcome(currentTeacher),800);
+      checkPendingGift();
+    }
+  }
+}
+
+function checkPendingGift(){
+  try{
+    const p=localStorage.getItem('vt_pending_gift');
+    if(!p) return;
+    const data=JSON.parse(p);
+    if(!data.gid || isGiftUsed(data.gid)){ localStorage.removeItem('vt_pending_gift'); return; }
+    walletPoints+=data.amount;
+    totalCharged+=data.amount;
+    saveCurrentTeacherData();
+    updateWallet();
+    markGiftUsed(data.gid);
+    localStorage.removeItem('vt_pending_gift');
+    giftSound();
+    showToast('🎁 استلمت هدية '+data.amount+' نقطة من '+data.from,'success');
+  }catch(e){}
+}
+
+function showHome(){
+  document.getElementById('welcomeName').textContent=currentTeacher;
+  document.getElementById('brandName').textContent=currentTeacher;
+  document.getElementById('accName').textContent=currentTeacher;
+  document.getElementById('accCode').textContent=teacherCode;
+  document.getElementById('screen-login').classList.add('hidden');
+  document.getElementById('screen-home').classList.remove('hidden');
+  document.getElementById('bottombar').classList.remove('hidden');
+}
+
+function doLogin(){
+  const name=document.getElementById('inp-teacher').value.trim();
+  const code=document.getElementById('inp-code').value.trim();
+  if(!name){errorSound();showToast('⚠️ اكتب اسم المعلم','warn');return;}
+  if(!code){errorSound();showToast('⚠️ اكتب كود الدخول','warn');return;}
+  if(!isValidUser(code)){errorSound();showToast('❌ كود الدخول غير صحيح','error');return;}
+
+  const existing=loadTeacherData(code);
+  if(existing){
+    currentTeacher=name;
+    teacherCode=code;
+    walletPoints=existing.walletPoints;
+    totalCharged=existing.totalCharged||INITIAL_POINTS;
+    totalSpent=existing.totalSpent||0;
+    STUDENTS=existing.students||[];
+    successSound();
+    showToast('👋 أهلاً بعودتك مستر '+name+'!');
+  } else {
+    currentTeacher=name;
+    teacherCode=code;
+    walletPoints=INITIAL_POINTS;
+    totalCharged=INITIAL_POINTS;
+    totalSpent=0;
+    STUDENTS=[];
+    loginSound();
+    if(referralCode){
+      if(hasDeviceUsedReferral()){
+        warnSound();
+        showToast('⚠️ تم رفض الإحالة — هذا الجهاز استخدم رابط من قبل','warn');
+      } else {
+        markDeviceUsedReferral();
+        showToast('🎉 أهلاً مستر '+name+'!','success');
+        setTimeout(()=>sendReferralNotification(name,code,referralCode,referrerPhone),1000);
+      }
+    } else {
+      showToast('🎉 أهلاً مستر '+name+'!');
+    }
+  }
+
+  saveCurrentTeacherData();
+  showHome();
+  updateWallet();
+  renderStudents();
+  speakWelcome(name);
+  checkPendingGift();
+}
+
+function sendReferralNotification(newName,newCode,refCode,refPhone){
+  const baseUrl=window.location.origin+window.location.pathname;
+  const gid=Date.now()+'-'+Math.floor(Math.random()*999999);
+  const giftLink=baseUrl+'?gift='+REFERRER_GIFT+'&from='+encodeURIComponent(newName)+'&gid='+gid;
+  const msg='🎁 مبروك! حصلت على هدية إحالة\n\n'
+    +'👤 المعلم الجديد: '+newName+'\n'
+    +'🔑 كوده: '+newCode+'\n\n'
+    +'💰 هديتك: '+REFERRER_GIFT+' نقطة\n\n'
+    +'👇 اضغط الرابط التالي لاستلام هديتك:\n'
+    +giftLink+'\n\n'
+    +'📱 هيفتح البرنامج تلقائياً ويزيد رصيدك فوراً';
+  const phone=(refPhone||'').replace(/\D/g,'');
+  if(phone && phone.length>=10){
+    window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(msg),'_blank');
+  } else {
+    window.open('https://wa.me/'+ADMIN_PHONE+'?text='+encodeURIComponent(msg),'_blank');
+  }
+}
+
+function claimGift(){
+  if(!giftAmount || giftAmount<=0) return;
+  if(!giftFrom) return;
+
+  const overlay=document.createElement('div');
+  overlay.className='gift-overlay';
+  overlay.innerHTML='<div class="gift-card">'
+    +'<div class="gift-icon">🎁</div>'
+    +'<h2>مبروك الهدية!</h2>'
+    +'<div class="gift-msg">حصلت على هدية من إحالة:</div>'
+    +'<div class="gift-from">👤 من: '+giftFrom+'</div>'
+    +'<div class="gift-amount">+'+giftAmount+'</div>'
+    +'<div class="gift-msg">نقطة</div>'
+    +'<button class="btn" onclick="confirmGift()">✅ استلم الهدية</button>'
+    +'<button class="btn btn-secondary" onclick="closeGift()">لاحقاً</button>'
+    +'</div>';
+  document.body.appendChild(overlay);
+  setTimeout(()=>giftSound(),200);
+}
+
+function confirmGift(){
+  if(isGiftUsed(giftClaimId)){ warnSound(); showToast('⚠️ الهدية مستخدمة قبل كده','warn'); closeGift(); return; }
+  let lastCode='';
+  try{ lastCode=localStorage.getItem('vt_current')||''; }catch(e){}
+  if(!lastCode){
+    try{ localStorage.setItem('vt_pending_gift',JSON.stringify({amount:giftAmount, from:giftFrom, gid:giftClaimId})); }catch(e){}
+    warnSound();
+    showToast('📌 تم حفظ الهدية — سجّل دخول لاستلامها','warn');
+    closeGift();
+    return;
+  }
+  const db=getAllTeachers();
+  const data=db[lastCode];
+  if(!data){ warnSound(); showToast('⚠️ مفيش حساب مسجّل','warn'); closeGift(); return; }
+  data.walletPoints=(data.walletPoints||0)+giftAmount;
+  data.totalCharged=(data.totalCharged||0)+giftAmount;
+  db[lastCode]=data;
+  saveAllTeachers(db);
+  markGiftUsed(giftClaimId);
+  if(currentTeacher===data.name && teacherCode===lastCode){
+    walletPoints=data.walletPoints;
+    totalCharged=data.totalCharged;
+    updateWallet();
+  }
+  giftSound();
+  successSound();
+  showToast('🎁 مبروك! اتضاف '+giftAmount+' نقطة لرصيدك','success');
+  closeGift();
+  const cleanUrl=window.location.origin+window.location.pathname;
+  window.history.replaceState({},'',cleanUrl);
+}
+
+function closeGift(){
+  const overlay=document.querySelector('.gift-overlay');
+  if(overlay) overlay.remove();
+}
+
+function shareReferral(){
+  const baseUrl=window.location.origin+window.location.pathname;
+  const link=baseUrl+'?ref='+teacherCode;
+  document.getElementById('shareLinkText').textContent=link;
+  document.getElementById('shareModal').classList.add('show');
+  clickSound();
+}
+
+function copyShareLink(){
+  const link=document.getElementById('shareLinkText').textContent;
+  if(!link || link==='—') return;
+  const ta=document.createElement('textarea');
+  ta.value=link;
+  ta.style.position='fixed';
+  ta.style.left='-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try{
+    document.execCommand('copy');
+    successSound();
+    showToast('✅ تم نسخ الرابط بنجاح','success');
+  }catch(e){
+    errorSound();
+    showToast('⚠️ فشل النسخ — انسخ يدوياً','warn');
+  }
+  ta.remove();
+}
+
+function shareViaWhatsApp(){
+  const link=document.getElementById('shareLinkText').textContent;
+  const msg='🎁 انضم لمنصة Vaily & Tbyan\n\n'
+    +'✨ منصة اختبارات ذكية للمعلمين\n\n'
+    +'🔗 اضغط الرابط:\n'+link+'\n\n'
+    +'🎓 دعوة من: مستر '+currentTeacher;
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  successSound();
+}
+
+function closeShareModal(){
+  document.getElementById('shareModal').classList.remove('show');
+  clickSound();
+}
+
+function goTo(screen){
+  ['home','students','wallet','account','create'].forEach(s=>{
+    document.getElementById('screen-'+s).classList.add('hidden');
+  });
+  document.getElementById('screen-'+screen).classList.remove('hidden');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const nb=document.querySelector('[data-nav="'+screen+'"]');
+  if(nb) nb.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderStudents(){
+  const list=document.getElementById('studentsList');
+  list.innerHTML='';
+  if(STUDENTS.length===0){
+    list.innerHTML='<button class="add-student-btn" onclick="clickSound();openStudentModal()"><div class="icon">➕</div><div class="txt">أضف طالباً</div><div class="sub">اضغط لإضافة طالب جديد</div></button>';
+    return;
+  }
+  const addBtn=document.createElement('button');
+  addBtn.className='add-student-btn';
+  addBtn.style.padding='16px';
+  addBtn.style.marginBottom='14px';
+  addBtn.innerHTML='<div class="txt" style="font-size:16px">➕ أضف طالباً</div>';
+  addBtn.onclick=()=>{clickSound();openStudentModal();};
+  list.appendChild(addBtn);
+  STUDENTS.forEach((s,idx)=>{
+    let cls='#10b981';
+    if(s.score<80) cls='#f59e0b';
+    if(s.score<60) cls='#ef4444';
+    const card=document.createElement('div');
+    card.className='student-card';
+    card.innerHTML='<div><div class="student-name">'+s.name+'</div><div class="student-sub">'+s.subject+'</div></div><div style="display:flex;align-items:center"><div class="student-score" style="background:linear-gradient(135deg,'+cls+',#059669)">'+s.score+'%</div><div class="del-btn" onclick="clickSound();deleteStudent('+idx+')">🗑️</div></div>';
+    list.appendChild(card);
+  });
+}
+
+function openStudentModal(){
+  document.getElementById('st-name').value='';
+  document.getElementById('st-subject').value='';
+  document.getElementById('st-score').value='';
+  document.getElementById('studentModal').classList.add('show');
+}
+function closeStudentModal(){ document.getElementById('studentModal').classList.remove('show'); }
+
+function saveStudent(){
+  const name=document.getElementById('st-name').value.trim();
+  const subject=document.getElementById('st-subject').value.trim();
+  const score=parseInt(document.getElementById('st-score').value,10);
+  if(!name){errorSound();showToast('⚠️ اكتب اسم الطالب','warn');return;}
+  if(isNaN(score)||score<0||score>100){errorSound();showToast('⚠️ الدرجة بين 0 و 100','warn');return;}
+  STUDENTS.push({name:name,subject:subject||'—',score:score,date:new Date().toLocaleDateString('ar-EG')});
+  saveCurrentTeacherData();
+  renderStudents();
+  closeStudentModal();
+  successSound();
+  showToast('✅ تم إضافة الطالب');
+}
+
+function deleteStudent(idx){
+  if(!confirm('🗑️ حذف الطالب؟')) return;
+  STUDENTS.splice(idx,1);
+  saveCurrentTeacherData();
+  renderStudents();
+  warnSound();
+  showToast('🗑️ تم الحذف');
+}
+
+function updateWallet(){ document.getElementById('walletBalance').textContent=walletPoints; }
+
+function selectPackage(el){
+  document.querySelectorAll('.pricing-row').forEach(r=>r.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedPackage={egp:el.dataset.egp,points:el.dataset.points};
+  document.getElementById('btn-recharge').textContent='💙 يلا نشحن';
+  successSound();
+  showToast('✅ تم اختيار باقة '+selectedPackage.points+' نقطة');
+}
+
+function requestCode(){
+  if(!selectedPackage){ warnSound(); showToast('⚠️ اختر باقة أولاً من الأسعار','warn'); return; }
+  let msg='💳 طلب شحن نقاط\n\n';
+  msg+='👤 المعلم: '+currentTeacher+'\n';
+  msg+='🔑 الكود: '+teacherCode+'\n\n';
+  msg+='🎁 الباقة المختارة:\n';
+  msg+='   '+selectedPackage.egp+' جنيه → '+selectedPackage.points+' نقطة\n\n';
+  msg+='📊 الرصيد الحالي: '+walletPoints+' نقطة\n\n';
+  msg+='من فضلك أرسل لي كود الشحن.';
+  window.open('https://wa.me/'+ADMIN_PHONE+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+function redeemCharge(){
+  const code=document.getElementById('inp-charge').value.trim();
+  if(!code){
+    if(!selectedPackage){ warnSound(); showToast('⚠️ اختر باقة أولاً أو أدخل كود الشحن','warn'); return; }
+    warnSound(); showToast('⚠️ أدخل كود الشحن أولاً','warn'); return;
+  }
+  const val=validateChargeCode(code);
+  if(val===null){errorSound();showToast('❌ كود غير صحيح','error');return;}
+  walletPoints+=val;
+  totalCharged+=val;
+  updateWallet();
+  saveCurrentTeacherData();
+  document.getElementById('inp-charge').value='';
+  document.querySelectorAll('.pricing-row').forEach(r=>r.classList.remove('selected'));
+  document.getElementById('btn-recharge').textContent='💳 شحن الرصيد';
+  selectedPackage=null;
+  cashSound();
+  showToast('✅ تم شحن '+val+' نقطة');
+}
+
+function contactAdminLogin(){
+  const name=document.getElementById('inp-teacher').value.trim();
+  if(!name){
+    errorSound();
+    showToast('⚠️ اكتب اسمك أولاً في خانة "اسم المعلم"','warn');
+    return;
+  }
+  const msg='🆕 إنشاء حساب جديد\n'
+    +'━━━━━━━━━━━━━━━━━\n\n'
+    +'👋 السلام عليكم، أريد الانضمام لمنصة Vaily & Tbyan\n\n'
+    +'👤 اسمي: '+name+'\n\n'
+    +'🔑 أرجو إرسال كود الدخول الخاص بي.';
+  window.open('https://wa.me/'+ADMIN_PHONE+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+function contactAdmin(){
+  const msg='💬 رسالة من المعلم\n\n👤 '+currentTeacher+'\n🔑 '+teacherCode;
+  window.open('https://wa.me/'+ADMIN_PHONE+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+function handleImageUpload(e){
+  const files=Array.from(e.target.files);
+  const remaining=MAX_IMAGES-uploadedImages.length;
+  if(files.length>remaining){
+    warnSound();
+    showToast('⚠️ الحد الأقصى '+MAX_IMAGES+' صور (متبقي '+remaining+')','warn');
+  }
+  const toAdd=files.slice(0,remaining);
+  if(toAdd.length===0){ document.getElementById('inp-images').value=''; return; }
+  let loaded=0;
+  let skipped=0;
+  toAdd.forEach(file=>{
+    if(file.size>3*1024*1024){
+      errorSound();
+      showToast('⚠️ صورة كبيرة ('+file.name+') - أقصى 3 ميجا','warn');
+      skipped++;
+      loaded++;
+      if(loaded===toAdd.length) renderImagesPreview();
+      return;
+    }
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      uploadedImages.push(ev.target.result);
+      loaded++;
+      if(loaded===toAdd.length){
+        renderImagesPreview();
+        if(skipped===0){
+          successSound();
+          showToast('✅ تم رفع '+(toAdd.length>1?toAdd.length+' صور':'صورة'));
+        }
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+  document.getElementById('inp-images').value='';
+}
+
+function renderImagesPreview(){
+  const grid=document.getElementById('imagesPreview');
+  grid.innerHTML='';
+  uploadedImages.forEach((src,idx)=>{
+    const thumb=document.createElement('div');
+    thumb.className='img-thumb';
+    thumb.innerHTML='<img src="'+src+'"><div class="remove-img" onclick="removeImage('+idx+')">✕</div>';
+    grid.appendChild(thumb);
+  });
+}
+
+function removeImage(idx){
+  uploadedImages.splice(idx,1);
+  renderImagesPreview();
+  clickSound();
+  showToast('🗑️ تم حذف الصورة');
+}
+
+function sendToHost(){
+  const subject=document.getElementById('inp-subject').value.trim();
+  const lesson=document.getElementById('inp-lesson').value.trim();
+  const source=document.getElementById('inp-source').value.trim();
+  if(!subject){errorSound();showToast('⚠️ اكتب عنوان المادة','warn');return;}
+  if(!lesson){errorSound();showToast('⚠️ اكتب اسم الدرس','warn');return;}
+  if(!source && uploadedImages.length===0){errorSound();showToast('⚠️ الصق الدرس أو ارفع صور','warn');return;}
+  if(walletPoints<POINTS_PER_EXAM){errorSound();showToast('❌ رصيدك غير كافٍ (تحتاج '+POINTS_PER_EXAM+' نقطة)','error');return;}
+
+  let msg='📷 يمكن للمعلم رفع صور الدرس هنا 🤍\n';
+  msg+='(لأن واتساب لا يقبل تحويلها تلقائياً)\n';
+  msg+='هيا نحن ننتظر صور الدرس وفقك الله \n';
+  msg+='━━━━━━━━━━━━━━━━━\n\n';
+  msg+='📝 طلب إنشاء اختبار جديد\n\n';
+  msg+='👤 المعلم: '+currentTeacher+'\n';
+  msg+='🔑 الكود: '+teacherCode+'\n\n';
+  msg+='📖 المادة: '+subject+'\n';
+  msg+='📚 الدرس: '+lesson+'\n';
+  if(source) msg+='📄 المحتوى: '+source+'\n';
+  if(uploadedImages.length>0) msg+='📷 عدد الصور: '+uploadedImages.length+'\n';
+  msg+='\n💰 الرصيد قبل: '+walletPoints+'\n';
+  msg+='➖ الخصم: '+POINTS_PER_EXAM+'\n';
+  msg+='✅ المتبقي: '+(walletPoints-POINTS_PER_EXAM);
+
+  window.open('https://wa.me/'+ADMIN_PHONE+'?text='+encodeURIComponent(msg),'_blank');
+  walletPoints-=POINTS_PER_EXAM;
+  totalSpent+=POINTS_PER_EXAM;
+  updateWallet();
+  saveCurrentTeacherData();
+  document.getElementById('inp-subject').value='';
+  document.getElementById('inp-lesson').value='';
+  document.getElementById('inp-source').value='';
+  uploadedImages=[];
+  renderImagesPreview();
+  cashSound();
+  showToast('✅ تم الإرسال — خُصم '+POINTS_PER_EXAM+' نقطة');
+  setTimeout(()=>goTo('home'),1800);
+}
+
+function deleteAccount(){
+  if(!confirm('⚠️ هل أنت متأكد من حذف الحساب؟\nسيتم حذف كل بياناتك')) return;
+  if(!confirm('⚠️ تأكيد أخير: حذف نهائي؟')) return;
+  const db=getAllTeachers();
+  delete db[teacherCode];
+  saveAllTeachers(db);
+  try{ localStorage.removeItem('vt_current'); }catch(e){}
+  currentTeacher='';
+  teacherCode='';
+  errorSound();
+  alert('🗑️ تم حذف الحساب');
+  location.reload();
+}
+
+function logout(){
+  if(!confirm('🚪 هل تريد تسجيل الخروج؟\nسيتم حفظ بياناتك تلقائياً')) return;
+  saveCurrentTeacherData();
+  try{ localStorage.removeItem('vt_current'); }catch(e){}
+  currentTeacher='';
+  teacherCode='';
+  warnSound();
+  location.reload();
+}
+
+function showToast(msg,type){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.className='toast';
+  if(type) t.classList.add(type);
+  t.classList.add('show');
+  setTimeout(()=>{t.classList.remove('show')},2500);
+}
+
+loadState();
+
+if(giftAmount>0 && giftFrom){
+  setTimeout(()=>claimGift(),700);
+}
+</script>
+
+</body>
+</html>
